@@ -1,0 +1,81 @@
+name: My Local LLM Config
+version: 0.0.1
+schema: v1
+
+models:
+  - name: qwen2.5-0.5b
+    provider: openai
+    model: qwen2.5-0.5b
+    apiBase: http://192.168.56.1:1234/v1
+    apiKey: not-needed
+    roles:
+      - chat
+      - edit
+      - apply
+#      - autocomplete
+    defaultCompletionOptions:
+      contextLength: 131072  # 128k // This could have 
+      maxTokens: 8000
+
+  - name: qwen2.5-coder-1_5b
+    provider: openai
+    model: qwen2.5-coder-1.5b
+    apiBase: http://192.168.56.1:1234/v1
+    apiKey: not-needed
+    roles:
+      - chat
+      - edit
+      - apply
+      - autocomplete
+
+  - name: qwen2.5-coder-3b
+    provider: openai
+    model: qwen2.5-coder-3b
+    apiBase: http://192.168.56.1:1234/v1
+    apiKey: not-needed
+    roles:
+      - chat
+      - edit
+      - apply
+#      - autocomplete
+  - name: qwen2.5-coder-7b
+    provider: openai
+    model: qwen2.5-coder-7b
+    apiBase: http://192.168.56.1:1234/v1
+    apiKey: not-needed
+    roles:
+      - chat
+      - edit
+      - apply
+#      - autocomplete
+    defaultCompletionOptions:
+      contextLength: 131072  # 128k
+      maxTokens: 8000
+#   
+  - name: deepseek-r1-8b 
+    provider: openai
+    model: deepseek-r1-8b
+    apiBase: http://192.168.56.1:1234/v1
+    apiKey: not-needed
+    roles:
+      - chat
+      - edit
+      - apply
+#      - autocomplete
+#    defaultCompletionOptions:
+#      contextLength: 131072  # 128k
+#      maxToken  : 
+  - name: phi3-mini
+    provider: openai
+    model: phi3-mini
+    apiBase: http://192.168.56.1:1234/v1
+    apiKey: not-needed
+    roles:
+      - chat
+      - edit
+      - apply
+#      - autocomplete
+#    defaultCompletionOptions:
+#      contextLength: 131072  # 128k
+#      maxToken  : 
+

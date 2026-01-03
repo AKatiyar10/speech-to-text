@@ -13,3 +13,6 @@ torchaudio>=2.0.0
 
 # Local LLM for Grammar Correction
 ollama
+
+# Speaker Embedding (100% local)
+resemblyzer>=0.2.0
