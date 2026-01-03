@@ -1,6 +1,8 @@
 """
 Main application entry point - Speech-to-Text with Speaker Diarization.
 
+This is the main server file that orchestrates all components.
+
 Imports from separate modules for better organization:
 - speaker_match.py: SpeakerMatch dataclass
 - voice_embedding_engine.py: VoiceEmbeddingEngine class
@@ -11,6 +13,11 @@ Imports from separate modules for better organization:
 - refinement_engine.py: EnhancedRefinementEngine class
 - audio_processor.py: ContinuousAudioProcessor class
 - connection_manager.py: ConnectionManager class
+
+To run the server:
+    python main_simple_vad_grammerly_corrected_with_gemma_with_continuation_v10.py
+
+The server will start on http://0.0.0.0:8000
 """
 import sys
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Query, HTTPException, UploadFile, File, Form
@@ -39,11 +46,11 @@ from connection_manager import ConnectionManager
 VERBOSE_LOGGING = True
 # ===========================================
 
-# Fix Windows console UTF-8 encoding
-if sys.platform == "win32":
-    import io
-    sys.stdout = io.TextIOWrapper(sys.stdout, encoding='utf-8', errors='replace')
-    sys.stderr = io.TextIOWrapper(sys.stderr, encoding='utf-8', errors='replace')
+# Skip console encoding setup to avoid hanging
+# if sys.platform == "win32":
+#     import io
+#     sys.stdout = io.TextIOWrapper(sys.stdout, encoding='utf-8', errors='replace')
+#     sys.stderr = io.TextIOWrapper(sys.stderr, encoding='utf-8', errors='replace')
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -74,7 +81,9 @@ class GenerateFeedbackResponse(BaseModel):
 
 
 # Initialize connection manager (loads models)
+print("Loading models and initializing components...", flush=True)
 manager = ConnectionManager(model_name="phi3:mini", history_file="session_history.json")
+print("[OK] All components initialized successfully", flush=True)
 
 
 # ===== GRACEFUL SHUTDOWN =====
@@ -328,8 +337,14 @@ async def websocket_endpoint(
 
 
 if __name__ == "__main__":
-    print("\n" + "="*60)
-    print(" SPEECH-TO-TEXT WITH ON-DEMAND FEEDBACK")
-    print(" Speaker Diarization Enabled")
-    print("="*60 + "\n")
+    print("\n" + "="*60, flush=True)
+    print(" SPEECH-TO-TEXT WITH ON-DEMAND FEEDBACK", flush=True)
+    print(" Speaker Diarization Enabled", flush=True)
+    print(f" Loaded {len(manager.history_manager.sessions)} sessions", flush=True)
+    print(f" Voice engine: {'enabled' if manager.voice_engine.enabled else 'disabled'}", flush=True)
+    print("="*60, flush=True)
+    print("Starting server on http://0.0.0.0:8000", flush=True)
+    print("Press Ctrl+C to stop", flush=True)
+    print("", flush=True)
+
     uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")

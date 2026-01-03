@@ -368,7 +368,7 @@ def mock_whisper():
 5. **Session IDs**: Auto-increment based on list length in `SessionHistoryManager`
 6. **WebSocket**: Handle `WebSocketDisconnect` exception, cleanup in `finally` block
 7. **Logging**: Use logger for all significant operations
-
+8. **Modification**: If you think any operation could change the current status, DO TAKE USER PERMISSIONG BEFORE RUNNING THEM.
 ---
 
 ## Common Patterns
