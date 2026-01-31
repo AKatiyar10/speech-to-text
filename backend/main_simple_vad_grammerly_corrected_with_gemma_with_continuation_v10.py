@@ -74,7 +74,7 @@ class GenerateFeedbackResponse(BaseModel):
 
 
 # Initialize connection manager (loads models)
-manager = ConnectionManager(model_name="phi3:mini", history_file="session_history.json")
+manager = ConnectionManager(model_name="glm-4.7:cloud", history_file="session_history.json")
 
 
 # ===== GRACEFUL SHUTDOWN =====

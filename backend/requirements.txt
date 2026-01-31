@@ -12,7 +12,7 @@ torch>=2.0.0
 torchaudio>=2.0.0
 
 # Local LLM for Grammar Correction
-ollama
+openai
 
 # Speaker Embedding (100% local)
 # resemblyzer>=0.1.4
