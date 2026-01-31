@@ -74,7 +74,10 @@ class GenerateFeedbackResponse(BaseModel):
 
 
 # Initialize connection manager (loads models)
-manager = ConnectionManager(model_name="glm-4.7:cloud", history_file="session_history.json")
+# Use absolute path for history file to ensure persistence across CWDs
+import os
+history_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "session_history.json")
+manager = ConnectionManager(model_name="llama3.1:8b", history_file=history_path)
 
 
 # ===== GRACEFUL SHUTDOWN =====

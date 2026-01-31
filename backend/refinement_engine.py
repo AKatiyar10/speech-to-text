@@ -127,9 +127,12 @@ TEXT: {raw_text}"""
                     max_tokens=250,
                 )
                 
-                feedback = response.choices[0].message.content.strip()
+                feedback = response.choices[0].message.content.strip() if response.choices[0].message.content else ""
                 
+                logger.info(f"📝 Raw LLM Feedback: '{feedback}'")
+
                 if not feedback or len(feedback) < 10:
+                    logger.warning(f"⚠️ Feedback too short/empty. Using fallback.")
                     feedback = "Great job! Your speech was clear and well-structured."
                 
                 elapsed = time.time() - start
