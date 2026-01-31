@@ -210,7 +210,7 @@ class ContinuousAudioProcessor:
                 "stats": self.stats
             }
 
-            if self.refinement.enabled:
+            if False and self.refinement.enabled: # DISABLED AUTO-REFINEMENT
                 context = self.conversation_manager.get_recent_context(num_entries=12)
                 if VERBOSE_LOGGING:
                     logger.info(f"[VERBOSE] Refining text with context (length: {len(context)} chars)")

@@ -199,6 +199,44 @@ async def generate_feedback_for_session(session_id: int):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/api/sessions/{session_id}/refine")
+async def refine_session_text(session_id: int):
+    """
+    ✨ On-demand text refinement (Grammar Correction)
+    """
+    try:
+        session = manager.history_manager.get_session_by_id(session_id)
+        if not session:
+            raise HTTPException(status_code=404, detail="Session not found")
+            
+        raw_text = session.get('raw_text', '')
+        if not raw_text:
+             raise HTTPException(status_code=400, detail="No text to refine")
+
+        # Check if already refined (and different from raw)
+        # If refined_text == raw_text, it means it hasn't been refined yet (or no changes needed)
+        # We'll allow re-running regardless, but good to know.
+        
+        if not manager.refinement.enabled:
+             raise HTTPException(status_code=503, detail="Refinement engine disabled")
+             
+        # Get context
+        context = manager.conversation_manager.get_recent_context(num_entries=10)
+        refined = await manager.refinement.refine_text(raw_text, context=context)
+        
+        # Update session using proper manager method
+        manager.history_manager.update_session_refinement(session_id, refined)
+        
+        return {
+            "session_id": session_id,
+            "refined_text": refined,
+            "status": "success"
+        }
+    except Exception as e:
+        logger.error(f"Refinement error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get("/api/stats")
 async def get_stats():
     """Get overall statistics"""

@@ -116,6 +116,7 @@ class SessionHistoryManager:
             logger.info(f"💾 Session #{session_id} saved (without feedback)")
             return session
     
+    
     def update_session_feedback(self, session_id: int, feedback: str) -> Dict[str, Any]:
         """Update a session with generated feedback"""
         with self._lock:
@@ -128,6 +129,19 @@ class SessionHistoryManager:
             session['character_counts']['feedback'] = len(feedback)
             self._save_history()
             logger.info(f"✅ Session #{session_id} updated with feedback")
+            return session
+
+    def update_session_refinement(self, session_id: int, refined_text: str) -> Dict[str, Any]:
+        """Update a session with manual refinement"""
+        with self._lock:
+            session = self._session_cache.get(session_id)
+            if not session:
+                raise ValueError(f"Session #{session_id} not found")
+
+            session['refined_text'] = refined_text
+            session['character_counts']['refined'] = len(refined_text)
+            self._save_history()
+            logger.info(f"✅ Session #{session_id} updated with refinement")
             return session
     
     def _save_history(self):
