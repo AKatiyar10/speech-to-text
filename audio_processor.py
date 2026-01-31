@@ -6,11 +6,16 @@ import logging
 import os
 import tempfile
 import time
-import wave
 from datetime import datetime
 from typing import Dict, Any
 
 import numpy as np
+try:
+    from scipy.io import wavfile
+    HAS_SCIPY = True
+except ImportError:
+    HAS_SCIPY = False
+    import wave
 
 from simple_vad import SimpleVAD
 from refinement_engine import OutputMode
@@ -99,11 +104,17 @@ class ContinuousAudioProcessor:
             pcm_int16 = np.frombuffer(combined, dtype=np.int16)
             pcm_float32 = pcm_int16.astype(np.float32) / 32768.0  # Normalize to [-1, 1]
 
-            with wave.open(wav_path, 'wb') as wf:
-                wf.setnchannels(1)
-                wf.setsampwidth(4)  # 4 bytes for 32-bit float
-                wf.setframerate(16000)
-                wf.writeframes(pcm_float32.tobytes())
+            # Create proper 32-bit float WAV file for Resemblyzer/librosa compatibility
+            if HAS_SCIPY:
+                # Use scipy for proper IEEE float WAV format (format code 3)
+                wavfile.write(wav_path, 16000, pcm_float32)
+            else:
+                # Fallback to wave module (may not work with Resemblyzer)
+                with wave.open(wav_path, 'wb') as wf:
+                    wf.setnchannels(1)
+                    wf.setsampwidth(4)
+                    wf.setframerate(16000)
+                    wf.writeframes(pcm_float32.tobytes())
             
             has_speech = self.vad.has_speech(wav_path)
             
