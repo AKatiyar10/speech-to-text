@@ -38,7 +38,7 @@ class VoiceEmbeddingEngine:
             logger.error(f"Failed to load Resemblyzer: {e}")
     
     def _load_enrolled_speakers(self):
-        """Load enrolled speakers from disk"""
+        """Load enrolled speakers from disk (only speakers with actual embeddings)"""
         emb_dir = Path("speakers/embeddings")
         if emb_dir.exists():
             for emb_file in emb_dir.glob("*.npy"):
@@ -52,9 +52,22 @@ class VoiceEmbeddingEngine:
                         logger.info(f"[VERBOSE] Loaded embedding for speaker: {name}")
                 except Exception as e:
                     logger.error(f"Failed to load embedding {emb_file}: {e}")
-        
+
         if VERBOSE_LOGGING:
-            logger.info(f"[VERBOSE] Loaded {len(self.enrolled_speakers)} enrolled speakers")
+            logger.info(f"[VERBOSE] Loaded {len(self.enrolled_speakers)} enrolled speakers with embeddings")
+
+    def reload_enrolled_speakers(self):
+        """Reload enrolled speakers from disk (call after relabeling)"""
+        # Note: This method should be called synchronously from speaker label manager
+        # Clear current enrolled speakers
+        self.enrolled_speakers.clear()
+        # Reload from disk
+        self._load_enrolled_speakers()
+        logger.info(f"✓ Reloaded enrolled speakers: {len(self.enrolled_speakers)} speakers")
+
+    def is_speaker_enrolled(self, name: str) -> bool:
+        """Check if a speaker has embeddings (is actually enrolled)"""
+        return name in self.enrolled_speakers and len(self.enrolled_speakers[name]) > 0
     
     async def extract_embedding(self, wav_path: str) -> np.ndarray:
         """Extract voice embedding from WAV file"""
@@ -129,7 +142,8 @@ class VoiceEmbeddingEngine:
             
             if VERBOSE_LOGGING:
                 logger.info(f"[VERBOSE] Best match: {best_match}, Score: {best_score:.4f}, Threshold: {confidence_threshold}")
-            
+                logger.info(f"[VERBOSE] Enrolled speakers: {list(self.enrolled_speakers.keys())}")
+
             if best_score >= confidence_threshold and best_match:
                 if VERBOSE_LOGGING:
                     logger.info(f"[VERBOSE] ✓ Speaker identified: {best_match} (confidence: {best_score:.4f})")

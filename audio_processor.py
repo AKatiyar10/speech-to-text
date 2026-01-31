@@ -10,6 +10,8 @@ import wave
 from datetime import datetime
 from typing import Dict, Any
 
+import numpy as np
+
 from simple_vad import SimpleVAD
 from refinement_engine import OutputMode
 from session_history_manager import SessionHistoryManager
@@ -92,12 +94,16 @@ class ContinuousAudioProcessor:
             # Create temp file
             wav_fd, wav_path = tempfile.mkstemp(suffix=".wav")
             os.close(wav_fd)  # Close file descriptor immediately
-            
+
+            # Convert 16-bit PCM to 32-bit float for Resemblyzer compatibility
+            pcm_int16 = np.frombuffer(combined, dtype=np.int16)
+            pcm_float32 = pcm_int16.astype(np.float32) / 32768.0  # Normalize to [-1, 1]
+
             with wave.open(wav_path, 'wb') as wf:
                 wf.setnchannels(1)
-                wf.setsampwidth(2)
+                wf.setsampwidth(4)  # 4 bytes for 32-bit float
                 wf.setframerate(16000)
-                wf.writeframes(combined)
+                wf.writeframes(pcm_float32.tobytes())
             
             has_speech = self.vad.has_speech(wav_path)
             
@@ -127,9 +133,17 @@ class ContinuousAudioProcessor:
             speaker_color = self.speaker_manager.UNKNOWN_COLOR if self.speaker_manager else '#3b82f6'
             speaker_confidence = 0.0
 
+            if VERBOSE_LOGGING:
+                logger.info(f"[VERBOSE] About to attempt speaker identification for: '{transcription[:30]}...'")
+
             if self.voice_engine.enabled:
                 try:
+                    if VERBOSE_LOGGING:
+                        logger.info(f"[VERBOSE] Calling identify_speaker...")
                     speaker_match = await self.voice_engine.identify_speaker(wav_path, confidence_threshold=0.75)
+
+                    if VERBOSE_LOGGING:
+                        logger.info(f"[VERBOSE] Speaker match result: name={speaker_match.name}, is_match={speaker_match.is_match}, confidence={speaker_match.confidence}")
 
                     if speaker_match.is_match:
                         speaker_name = speaker_match.name
@@ -137,6 +151,8 @@ class ContinuousAudioProcessor:
                         if VERBOSE_LOGGING:
                             logger.info(f"[VERBOSE] Recognized speaker: {speaker_name} (color: {speaker_color})")
                     else:
+                        if VERBOSE_LOGGING:
+                            logger.info(f"[VERBOSE] Creating unknown speaker...")
                         speaker_name = self.speaker_manager.get_or_create_unknown(speaker_match.embedding)
                         speaker_color = self.speaker_manager.UNKNOWN_COLOR
                         if VERBOSE_LOGGING:
@@ -163,6 +179,11 @@ class ContinuousAudioProcessor:
                     )
                 except Exception as e:
                     logger.error(f"Speaker identification error: {e}")
+                    import traceback
+                    traceback.print_exc()
+            else:
+                if VERBOSE_LOGGING:
+                    logger.info(f"[VERBOSE] Voice engine not enabled, skipping speaker identification")
             
             self.accumulated_text.append(transcription)
             self.stats["interim_count"] += 1
@@ -174,7 +195,10 @@ class ContinuousAudioProcessor:
                 "text": current_full_text,
                 "skipped": False,
                 "interim": True,
-                "stats": self.stats
+                "stats": self.stats,
+                "speaker": self.current_speaker,
+                "speaker_color": self.current_speaker_color,
+                "confidence": self.current_speaker_confidence
             }
                 
         except Exception as e:
@@ -237,7 +261,7 @@ class ContinuousAudioProcessor:
             result["confidence"] = self.current_speaker_confidence
 
             if VERBOSE_LOGGING:
-                logger.info(f"[VERBOSE] Final result session_id: {result['session_id']}, speaker: {result['speaker']}")
+                logger.info(f"[VERBOSE] Final result session_id: {result['session_id']}, speaker: {result['speaker']}, color: {result['speaker_color']}, confidence: {result['confidence']}")
 
             if self.output_mode == OutputMode.RAW_ONLY:
                 result["text"] = raw_text

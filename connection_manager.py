@@ -35,13 +35,13 @@ class ConnectionManager:
         self.whisper = whisper.load_model("base")
         logger.info("✓ Whisper loaded")
 
-        self.vad = SimpleVAD(energy_threshold=0.02)
+        self.vad = SimpleVAD(energy_threshold=0.005)  # Lower threshold for easier speech detection
         self.refinement = EnhancedRefinementEngine(model_name=model_name)
         self.history_manager = SessionHistoryManager(history_file=history_file)
 
         # Speaker diarization components
         self.voice_engine = VoiceEmbeddingEngine()
-        self.speaker_manager = SpeakerLabelManager()
+        self.speaker_manager = SpeakerLabelManager(voice_engine=self.voice_engine)
         self.conversation_manager = ConversationManager()
 
         logger.info("="*60)

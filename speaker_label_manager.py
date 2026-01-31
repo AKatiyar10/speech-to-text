@@ -18,15 +18,16 @@ VERBOSE_LOGGING = True
 
 class SpeakerLabelManager:
     """Manages speaker labels (ALPHA, UNKNOWN_XX) and color coding"""
-    
+
     UNKNOWN_COLOR = "#3b82f6"
     ALPHA_COLOR = "#22c55e"
-    
-    def __init__(self, labels_file="sessions/speaker_labels.json"):
+
+    def __init__(self, labels_file="sessions/speaker_labels.json", voice_engine=None):
         self.labels_file = Path(labels_file)
         self.labels = {}
         self.unknown_count = 0
         self._lock = threading.Lock()
+        self.voice_engine = voice_engine  # Reference to voice engine for reloading
         self._load_labels()
         logger.info(f"✓ Loaded {len(self.labels)} speaker labels")
         logger.info(f"✓ Speaker label manager initialized: {self.labels_file}")
@@ -89,8 +90,17 @@ class SpeakerLabelManager:
     
     def relabel_speaker(self, old_name: str, new_name: str, color: str = None) -> bool:
         """Relabel speaker (UNKNOWN_XX -> ALPHA/Custom)"""
+        # If the speaker doesn't exist in labels, create it first
         if old_name not in self.labels:
-            return False
+            if VERBOSE_LOGGING:
+                logger.info(f"[VERBOSE] Speaker {old_name} not found in labels, creating it")
+            # Create the speaker label if it doesn't exist
+            self.labels[old_name] = {
+                "name": old_name,
+                "color": self.UNKNOWN_COLOR if old_name.startswith("UNKNOWN") else self.ALPHA_COLOR,
+                "created_at": datetime.now().isoformat(),
+                "last_heard": datetime.now().isoformat()
+            }
         
         with self._lock:
             old_label = self.labels[old_name]
@@ -100,6 +110,9 @@ class SpeakerLabelManager:
             new_emb_file = Path("speakers/embeddings") / f"{new_name}.npy"
             if old_emb_file.exists():
                 old_emb_file.rename(new_emb_file)
+                logger.info(f"✓ Renamed embedding file: {old_name}.npy → {new_name}.npy")
+            else:
+                logger.warning(f"⚠️ Embedding file not found: {old_name}.npy")
             
             # Update or create new label
             if new_name not in self.labels:
@@ -112,7 +125,11 @@ class SpeakerLabelManager:
             
             del self.labels[old_name]
             self._save_labels()
-            
+
+            # Reload enrolled speakers in voice engine to reflect the name change
+            if self.voice_engine:
+                self.voice_engine.reload_enrolled_speakers()
+
             logger.info(f"✓ Relabeled: {old_name} → {new_name}")
             return True
     

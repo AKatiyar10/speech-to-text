@@ -207,7 +207,7 @@ async def enroll_speaker(
     name: str = Form(...),
     audio_file: UploadFile = File(...)
 ):
-    """Direct enrollment endpoint"""
+    """Enroll speaker with audio file"""
     try:
         wav_fd, wav_path = tempfile.mkstemp(suffix=".wav")
         os.close(wav_fd)
@@ -227,10 +227,46 @@ async def enroll_speaker(
             "success": True,
             "speaker_name": name,
             "color": color,
+            "enrolled": True,
             "confidence": 0.0
         }
     except Exception as e:
         logger.error(f"Enroll error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/speakers/enroll/{name}")
+async def enroll_existing_speaker(name: str, audio_file: UploadFile = File(...)):
+    """Enroll an existing speaker (from labels) with audio"""
+    try:
+        # Check if speaker exists in labels
+        if name not in manager.speaker_manager.labels:
+            raise HTTPException(status_code=404, detail=f"Speaker {name} not found in labels")
+
+        wav_fd, wav_path = tempfile.mkstemp(suffix=".wav")
+        os.close(wav_fd)
+
+        with open(wav_path, 'wb') as f:
+            content = await audio_file.read()
+            f.write(content)
+
+        embedding = await manager.voice_engine.extract_embedding(wav_path)
+        result = await manager.voice_engine.enroll_speaker(name, wav_path)
+
+        # Update speaker's last heard time
+        manager.speaker_manager.update_last_heard(name)
+
+        logger.info(f"✓ Speaker enrolled with audio: {name}")
+
+        return {
+            "success": True,
+            "speaker_name": name,
+            "enrolled": True,
+            "color": manager.speaker_manager.get_label_color(name)
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Enroll existing speaker error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -257,8 +293,20 @@ async def relabel_speaker(
 @app.get("/api/speakers/list")
 async def get_speakers():
     """Get all enrolled speakers"""
+    speakers = manager.speaker_manager.get_all_labels()
+
+    # Add enrollment status for each speaker
+    enrolled_count = 0
+    for name, data in speakers.items():
+        enrolled = manager.voice_engine.is_speaker_enrolled(name)
+        data["enrolled"] = enrolled
+        if enrolled:
+            enrolled_count += 1
+
     return {
-        "speakers": manager.speaker_manager.get_all_labels()
+        "speakers": speakers,
+        "total_speakers": len(speakers),
+        "total_enrolled": enrolled_count
     }
 
 

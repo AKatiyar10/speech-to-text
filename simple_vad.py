@@ -35,8 +35,8 @@ class SimpleVAD:
             audio_normalized = audio_array.astype(np.float32) * (1.0 / 32768.0)
             rms_energy = np.sqrt(np.mean(np.square(audio_normalized)))
             has_speech = rms_energy > self.energy_threshold
-            
-            logger.info(f"VAD: Energy={rms_energy:.4f} {'✓ Speech' if has_speech else '✗ Silence'}")
+
+            logger.info(f"VAD: Energy={rms_energy:.4f} Threshold={self.energy_threshold:.4f} {'✓ Speech' if has_speech else '✗ Silence'}")
             return has_speech
             
         except Exception as e:
