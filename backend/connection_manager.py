@@ -3,8 +3,10 @@ Connection manager for handling WebSocket connections.
 """
 import asyncio
 import logging
+import os
 import whisper
 from fastapi import WebSocket
+from websockets.exceptions import ConnectionClosed
 
 from session_history_manager import SessionHistoryManager
 from simple_vad import SimpleVAD
@@ -23,7 +25,12 @@ VERBOSE_LOGGING = True
 
 class ConnectionManager:
     """Manages connections with optimized model loading"""
-    def __init__(self, model_name="phi3:mini", history_file="session_history.json"):
+    def __init__(self, model_name="phi3:mini", history_file=None):
+        if history_file is None:
+            # Use absolute path relative to this file to ensure it stays in backend/sessions/
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            history_file = os.path.join(base_dir, "sessions", "session_history.json")
+            
         self.connections = {}
         self.processors = {}
 
@@ -124,6 +131,8 @@ class ConnectionManager:
                         })
                         if VERBOSE_LOGGING:
                             logger.info(f"[VERBOSE] Sent message to {client_id}: type=transcription, interim={result.get('interim')}")
+                    except ConnectionClosed:
+                        logger.info(f"Client {client_id} disconnected during send")
                     except Exception as e:
                         logger.warning(f"Failed to send message to {client_id}: {e}")
 

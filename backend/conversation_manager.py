@@ -3,6 +3,7 @@ Stores conversations in markdown for context awareness.
 """
 import logging
 import threading
+import os
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Any, Optional
@@ -17,7 +18,12 @@ VERBOSE_LOGGING = True
 class ConversationManager:
     """Stores conversations in markdown for context awareness"""
     
-    def __init__(self, md_file="sessions/conversations.md"):
+    def __init__(self, md_file=None):
+        if md_file is None:
+            # Use absolute path relative to this file to ensure it stays in backend/sessions
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            md_file = os.path.join(base_dir, "sessions", "conversations.md")
+            
         self.md_file = Path(md_file)
         self._lock = threading.Lock()
         self._ensure_file_exists()

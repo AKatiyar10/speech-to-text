@@ -1,0 +1,1028 @@
+INFO:connection_manager:============================================================
+INFO:connection_manager: LOADING MODELS
+INFO:connection_manager:============================================================
+INFO:connection_manager:✓ Whisper loaded
+INFO:refinement_engine:Loading Refinement Engine (model=llama3.1:8b)...
+INFO:refinement_engine:✓ Refinement Engine initialized with llama3.1:8b via OpenAI Client
+INFO:session_history_manager:✓ Loaded 6 sessions from history
+INFO:session_history_manager:📁 Session history manager initialized: /home/poker/workspace/speech-to-text-app/backend/sessions/session_history.json
+INFO:voice_embedding_engine:[VERBOSE] Loaded 0 enrolled speakers
+WARNING:voice_embedding_engine:✗ Resemblyzer not installed: pip install resemblyzer
+WARNING:voice_embedding_engine:Speaker identification disabled (core features still work)
+INFO:speaker_label_manager:✓ Loaded 0 speaker labels
+INFO:speaker_label_manager:✓ Speaker label manager initialized: sessions/speaker_labels.json
+INFO:conversation_manager:✓ Conversation manager initialized: /home/poker/workspace/speech-to-text-app/backend/sessions/conversations.md
+INFO:connection_manager:============================================================
+INFO:connection_manager: SYSTEM READY
+INFO:connection_manager:============================================================
+/home/poker/workspace/speech-to-text-app/backend/main_simple_vad_grammerly_corrected_with_gemma_with_continuation_v10.py:85: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("shutdown")
+/home/poker/workspace/speech-to-text-app/backend/main_simple_vad_grammerly_corrected_with_gemma_with_continuation_v10.py:310: DeprecationWarning: `regex` has been deprecated, please use `pattern` instead
+  mode: Optional[str] = Query(default="all", regex="^(raw|refined|full|all)$")
+INFO:     Started server process [222292]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:__main__:[VERBOSE] WebSocket connection request: client_id=client_1769852798288_6nw6nzg83, mode=all
+INFO:     ('127.0.0.1', 38014) - "WebSocket /ws/audio/client_1769852798288_6nw6nzg83?mode=all" [accepted]
+INFO:audio_processor:ContinuousAudioProcessor ready (mode=all, client=client_1769852798288_6nw6nzg83)
+INFO:connection_manager:✓ Client connected: client_1769852798288_6nw6nzg83
+INFO:__main__:[VERBOSE] WebSocket connected: client_1769852798288_6nw6nzg83
+
+============================================================
+ SPEECH-TO-TEXT WITH ON-DEMAND FEEDBACK
+ Speaker Diarization Enabled
+============================================================
+
+INFO:     127.0.0.1:38020 - "GET /api/sessions/recent?limit=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38032 - "GET /api/speakers/list HTTP/1.1" 200 OK
+INFO:     connection open
+INFO:     127.0.0.1:38020 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:__main__:============================================================
+INFO:__main__:🎯 ON-DEMAND FEEDBACK REQUEST for session #6
+INFO:refinement_engine:💡 Generating feedback for: 'Hello, let's test this. and check weather, everyth...'
+INFO:__main__:============================================================
+INFO:__main__:🎯 ON-DEMAND FEEDBACK REQUEST for session #1
+INFO:httpx:HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:refinement_engine:📝 Raw LLM Feedback: 'Here are 3-5 brief feedback points on filler words, clarity, and effectiveness:
+
+**Filler Words:**
+
+* The use of "and" to start a sentence can make the speech sound a bit informal or unpolished.
+* The phrase "you know what?" is a common filler expression that can detract from the message. It's better to rephrase or omit it altogether.
+
+**Clarity:**
+
+* The sentence "everything is as correct" could be clearer if you specified what exactly is being checked (e.g., "everything is in order").
+* The phrase "but you know what?" seems to introduce a contrast, but the sentence that follows doesn't quite live up to the expectation. Consider rephrasing or adding more content to make the point clear.
+
+**Effectiveness:**
+
+* The speech starts off with a fairly casual tone and then quickly becomes unclear in its purpose. Consider starting with a stronger opening statement or clarifying your intentions.
+* Overall, the speech feels a bit disjointed and doesn't quite convey a clear message. Try to focus on one main point and develop it throughout the speech.
+
+Remember that these are just constructive feedback points, and I'm here to help you improve!'
+INFO:refinement_engine:✓ Feedback generated in 57.44s
+INFO:session_history_manager:✓ History saved (6 sessions)
+INFO:session_history_manager:✅ Session #6 updated with feedback
+INFO:__main__:✅ Feedback generated for session #6
+INFO:__main__:============================================================
+INFO:     127.0.0.1:56386 - "POST /api/sessions/6/generate-feedback HTTP/1.1" 200 OK
+INFO:refinement_engine:💡 Generating feedback for: 'Hello Oh, look. like we are a gate And here....'
+INFO:     127.0.0.1:56386 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:refinement_engine:📝 Raw LLM Feedback: 'Here's some constructive feedback:
+
+**Filler Words (1/5)**
+
+* The use of "Oh" at the beginning is a good attempt to engage the audience, but it feels a bit awkward as an opening phrase.
+* The speech could benefit from fewer filler words ("like", "And"), which can make the speaker sound uncertain or unprepared.
+
+**Clarity (2/5)**
+
+* It's unclear what the speaker intends to convey with this brief statement. What is the main point they want to get across?
+* The use of vague phrases like "we are a gate" and "here" doesn't provide much context or meaning.
+* Consider adding more specific language to help the audience understand the purpose of the speech.
+
+**Effectiveness (3/5)**
+
+* This brief statement lacks impact, as it doesn't convey any clear message or emotion. Consider starting with a stronger opening that grabs the audience's attention.
+* The speaker could benefit from practicing their delivery to feel more confident and natural in front of an audience.
+* To make this speech more effective, consider adding a clear thesis statement, supporting evidence, and a strong conclusion to tie everything together.'
+INFO:refinement_engine:✓ Feedback generated in 51.59s
+INFO:session_history_manager:✓ History saved (6 sessions)
+INFO:session_history_manager:✅ Session #1 updated with feedback
+INFO:__main__:✅ Feedback generated for session #1
+INFO:__main__:============================================================
+INFO:     127.0.0.1:42184 - "POST /api/sessions/1/generate-feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42184 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:__main__:[VERBOSE] WebSocket connection request: client_id=client_1769853130494_uk8thzcq4, mode=all
+INFO:     ('127.0.0.1', 35062) - "WebSocket /ws/audio/client_1769853130494_uk8thzcq4?mode=all" [accepted]
+INFO:audio_processor:ContinuousAudioProcessor ready (mode=all, client=client_1769853130494_uk8thzcq4)
+INFO:connection_manager:✓ Client connected: client_1769853130494_uk8thzcq4
+INFO:__main__:[VERBOSE] WebSocket connected: client_1769853130494_uk8thzcq4
+INFO:     127.0.0.1:35068 - "GET /api/sessions/recent?limit=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35072 - "GET /api/speakers/list HTTP/1.1" 200 OK
+INFO:     connection open
+INFO:     127.0.0.1:35068 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:__main__:[VERBOSE] WebSocket connection request: client_id=client_1769853324590_a1ghsjkih, mode=all
+INFO:     ('127.0.0.1', 40732) - "WebSocket /ws/audio/client_1769853324590_a1ghsjkih?mode=all" [accepted]
+INFO:audio_processor:ContinuousAudioProcessor ready (mode=all, client=client_1769853324590_a1ghsjkih)
+INFO:connection_manager:✓ Client connected: client_1769853324590_a1ghsjkih
+INFO:__main__:[VERBOSE] WebSocket connected: client_1769853324590_a1ghsjkih
+INFO:     127.0.0.1:40740 - "GET /api/sessions/recent?limit=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40748 - "GET /api/speakers/list HTTP/1.1" 200 OK
+INFO:     connection open
+INFO:     127.0.0.1:40740 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0010 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0008 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0007 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0007 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0007 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0007 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0008 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0046 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.1021 ✓ Speech
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:00<00:00, 277.35frames/s]100%|██████████| 204/204 [00:00<00:00, 277.27frames/s]
+INFO:audio_processor:Whisper (0.95s): 'Hello'
+INFO:audio_processor:📝 Interim: 'Hello'
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=False, interim=True, text=Hello
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853324590_a1ghsjkih: type=transcription, interim=True
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0115 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0002 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:audio_processor:============================================================
+INFO:audio_processor:🎯 FINALIZING (mode=all): 'Hello'
+INFO:audio_processor:[VERBOSE] Finalizing session: speaker=UNKNOWN, color=#3b82f6, confidence=0.0
+INFO:audio_processor:[VERBOSE] Refining text with context (length: 19 chars)
+INFO:refinement_engine:🔧 Refining text: 'Hello...'
+INFO:httpx:HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:refinement_engine:✓ Refined in 16.44s
+INFO:session_history_manager:[VERBOSE] add_session called: raw_text='Hello...', refined_text='I don't see the original transcription provided. Please share it with me so I can refine it accordin...', speaker=UNKNOWN, confidence=0.0
+INFO:session_history_manager:✓ History saved (7 sessions)
+INFO:session_history_manager:[VERBOSE] Session #7 saved with speaker info: name=UNKNOWN, color=#3b82f6, confidence=0.0
+INFO:session_history_manager:💾 Session #7 saved (without feedback)
+INFO:audio_processor:💾 Session saved: #7
+INFO:audio_processor:[VERBOSE] Final result session_id: 7, speaker: UNKNOWN
+INFO:audio_processor:[VERBOSE] Final result fields: ['skipped', 'interim', 'stats', 'session_id', 'speaker', 'speaker_color', 'confidence', 'raw_text', 'refined_text', 'speaking_feedback']
+INFO:audio_processor:✅ Session #7 finalized (speaker: UNKNOWN)
+INFO:audio_processor:============================================================
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=False, interim=False, text=
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853324590_a1ghsjkih: type=transcription, interim=False
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0276 ✓ Speech
+INFO:     127.0.0.1:36994 - "GET /api/stats HTTP/1.1" 200 OK
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:00<00:00, 248.23frames/s]100%|██████████| 204/204 [00:00<00:00, 248.18frames/s]
+INFO:audio_processor:Whisper (0.96s): 'Hello'
+INFO:audio_processor:📝 Interim: 'Hello'
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=False, interim=True, text=Hello
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853324590_a1ghsjkih: type=transcription, interim=True
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0413 ✓ Speech
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:00<00:00, 238.44frames/s]100%|██████████| 204/204 [00:00<00:00, 238.39frames/s]
+INFO:audio_processor:Whisper (0.98s): 'Hello, hello.'
+INFO:audio_processor:📝 Interim: 'Hello Hello, hello.'
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=False, interim=True, text=Hello Hello, hello.
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853324590_a1ghsjkih: type=transcription, interim=True
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0290 ✓ Speech
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:00<00:00, 233.54frames/s]100%|██████████| 204/204 [00:00<00:00, 233.50frames/s]
+INFO:audio_processor:Whisper (1.00s): 'working.'
+INFO:audio_processor:📝 Interim: 'Hello Hello, hello. working.'
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=False, interim=True, text=Hello Hello, hello. working.
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853324590_a1ghsjkih: type=transcription, interim=True
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0005 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0003 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:audio_processor:============================================================
+INFO:audio_processor:🎯 FINALIZING (mode=all): 'Hello Hello, hello. working.'
+INFO:audio_processor:[VERBOSE] Finalizing session: speaker=UNKNOWN, color=#3b82f6, confidence=0.0
+INFO:audio_processor:[VERBOSE] Refining text with context (length: 19 chars)
+INFO:refinement_engine:🔧 Refining text: 'Hello Hello, hello. working....'
+INFO:httpx:HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:refinement_engine:✓ Refined in 24.81s
+INFO:session_history_manager:[VERBOSE] add_session called: raw_text='Hello Hello, hello. working....', refined_text='Here is the refined transcription:
+
+"Hello! I'm working."
+
+I made the following changes to refine th...', speaker=UNKNOWN, confidence=0.0
+INFO:session_history_manager:✓ History saved (8 sessions)
+INFO:session_history_manager:[VERBOSE] Session #8 saved with speaker info: name=UNKNOWN, color=#3b82f6, confidence=0.0
+INFO:session_history_manager:💾 Session #8 saved (without feedback)
+INFO:audio_processor:💾 Session saved: #8
+INFO:audio_processor:[VERBOSE] Final result session_id: 8, speaker: UNKNOWN
+INFO:audio_processor:[VERBOSE] Final result fields: ['skipped', 'interim', 'stats', 'session_id', 'speaker', 'speaker_color', 'confidence', 'raw_text', 'refined_text', 'speaking_feedback']
+INFO:audio_processor:✅ Session #8 finalized (speaker: UNKNOWN)
+INFO:audio_processor:============================================================
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=False, interim=False, text=
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853324590_a1ghsjkih: type=transcription, interim=False
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0004 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0003 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853324590_a1ghsjkih: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853324590_a1ghsjkih
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0042 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853324590_a1ghsjkih: skipped=True, interim=True, text=
+INFO:     127.0.0.1:57302 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:__main__:WebSocket disconnected normally: client_1769853130494_uk8thzcq4
+INFO:connection_manager:✓ Client disconnected: client_1769853130494_uk8thzcq4
+INFO:     connection closed
+INFO:__main__:[VERBOSE] WebSocket connection request: client_id=client_1769853487484_ail36ue1q, mode=all
+INFO:     ('127.0.0.1', 46026) - "WebSocket /ws/audio/client_1769853487484_ail36ue1q?mode=all" [accepted]
+INFO:audio_processor:ContinuousAudioProcessor ready (mode=all, client=client_1769853487484_ail36ue1q)
+INFO:connection_manager:✓ Client connected: client_1769853487484_ail36ue1q
+INFO:__main__:[VERBOSE] WebSocket connected: client_1769853487484_ail36ue1q
+INFO:     127.0.0.1:46034 - "GET /api/sessions/recent?limit=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46036 - "GET /api/speakers/list HTTP/1.1" 200 OK
+INFO:     connection open
+INFO:     127.0.0.1:46034 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.1098 ✓ Speech
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:00<00:00, 209.20frames/s]100%|██████████| 204/204 [00:00<00:00, 209.16frames/s]
+INFO:audio_processor:Whisper (1.10s): 'Hello, let's'
+INFO:audio_processor:📝 Interim: 'Hello, let's'
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=False, interim=True, text=Hello, let's
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853487484_ail36ue1q: type=transcription, interim=True
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0419 ✓ Speech
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:01<00:00, 185.06frames/s]100%|██████████| 204/204 [00:01<00:00, 185.02frames/s]
+INFO:audio_processor:Whisper (1.22s): 'just test this'
+INFO:audio_processor:📝 Interim: 'Hello, let's just test this'
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=False, interim=True, text=Hello, let's just test this
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853487484_ail36ue1q: type=transcription, interim=True
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0438 ✓ Speech
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:01<00:00, 171.85frames/s]100%|██████████| 204/204 [00:01<00:00, 171.82frames/s]
+INFO:audio_processor:Whisper (1.31s): 'and check whether this time it's'
+INFO:audio_processor:📝 Interim: 'Hello, let's just test this and check whether this time it's'
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=False, interim=True, text=Hello, let's just test this and check whether this
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853487484_ail36ue1q: type=transcription, interim=True
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0295 ✓ Speech
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:00<00:00, 243.21frames/s]100%|██████████| 204/204 [00:00<00:00, 243.07frames/s]
+INFO:audio_processor:Empty transcription (0.97s)
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0578 ✓ Speech
+  0%|          | 0/204 [00:00<?, ?frames/s]100%|██████████| 204/204 [00:01<00:00, 187.08frames/s]100%|██████████| 204/204 [00:01<00:00, 187.04frames/s]
+INFO:audio_processor:Whisper (1.21s): 'the upper lever again.'
+INFO:audio_processor:📝 Interim: 'Hello, let's just test this and check whether this time it's the upper lever again.'
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=False, interim=True, text=Hello, let's just test this and check whether this
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853487484_ail36ue1q: type=transcription, interim=True
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0005 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0005 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:audio_processor:============================================================
+INFO:audio_processor:🎯 FINALIZING (mode=all): 'Hello, let's just test this and check whether this time it's the upper lever again.'
+INFO:audio_processor:[VERBOSE] Finalizing session: speaker=UNKNOWN, color=#3b82f6, confidence=0.0
+INFO:audio_processor:[VERBOSE] Refining text with context (length: 19 chars)
+INFO:refinement_engine:🔧 Refining text: 'Hello, let's just test this and check whether this...'
+INFO:httpx:HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:refinement_engine:✓ Refined in 28.49s
+INFO:session_history_manager:[VERBOSE] add_session called: raw_text='Hello, let's just test this and check whether this time it's the upper lever again....', refined_text='Here is the refined transcription:
+
+"Hello, let's test this again to see if it's the upper level."
+
+...', speaker=UNKNOWN, confidence=0.0
+INFO:session_history_manager:✓ History saved (9 sessions)
+INFO:session_history_manager:[VERBOSE] Session #9 saved with speaker info: name=UNKNOWN, color=#3b82f6, confidence=0.0
+INFO:session_history_manager:💾 Session #9 saved (without feedback)
+INFO:audio_processor:💾 Session saved: #9
+INFO:audio_processor:[VERBOSE] Final result session_id: 9, speaker: UNKNOWN
+INFO:audio_processor:[VERBOSE] Final result fields: ['skipped', 'interim', 'stats', 'session_id', 'speaker', 'speaker_color', 'confidence', 'raw_text', 'refined_text', 'speaking_feedback']
+INFO:audio_processor:✅ Session #9 finalized (speaker: UNKNOWN)
+INFO:audio_processor:============================================================
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=False, interim=False, text=
+INFO:connection_manager:[VERBOSE] Sent message to client_1769853487484_ail36ue1q: type=transcription, interim=False
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0009 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0012 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0034 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0038 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0004 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0024 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0005 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0005 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:     127.0.0.1:47046 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0004 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0006 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:connection_manager:[VERBOSE] Processing audio for client_1769853487484_ail36ue1q
+INFO:audio_processor:[VERBOSE] process() called with audio buffer
+INFO:audio_processor:============================================================
+INFO:audio_processor:Processing 2.0s
+INFO:simple_vad:VAD: Energy=0.0020 ✗ Silence
+INFO:audio_processor:⚠️ Silence detected
+INFO:connection_manager:[VERBOSE] Process result for client_1769853487484_ail36ue1q: skipped=True, interim=True, text=
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:[VERBOSE] Audio received from client_1769853487484_ail36ue1q: 8192 bytes
+INFO:__main__:============================================================
+INFO:__main__:🎯 ON-DEMAND FEEDBACK REQUEST for session #9
+INFO:refinement_engine:💡 Generating feedback for: 'Hello, let's just test this and check whether this...'
+INFO:httpx:HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:refinement_engine:📝 Raw LLM Feedback: 'Here are 3-5 brief feedback points:
+
+**Filler Words:**
+1. **"Just"**: Consider removing or rephrasing "just". It's a filler word that doesn't add much value to the sentence.
+
+**Clarity:**
+2. **Specificity**: The speech could benefit from more specific language. Instead of saying "this time", consider specifying what you're testing (e.g., "whether it's the upper level again, as we experienced previously").
+
+**Effectiveness:**
+3. **Purpose and Tone**: The tone comes across as somewhat casual and uncertain ("just test this"). Consider adjusting your language to convey a sense of confidence and purpose.'
+INFO:refinement_engine:✓ Feedback generated in 27.79s
+INFO:session_history_manager:✓ History saved (9 sessions)
+INFO:session_history_manager:✅ Session #9 updated with feedback
+INFO:__main__:✅ Feedback generated for session #9
+INFO:__main__:============================================================
+INFO:     127.0.0.1:40484 - "POST /api/sessions/9/generate-feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40484 - "GET /api/stats HTTP/1.1" 200 OK

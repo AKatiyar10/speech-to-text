@@ -142,4 +142,4 @@ TEXT: {raw_text}"""
                 
             except Exception as e:
                 logger.error(f"Feedback generation error: {e}")
-                return f"Error generating feedback: {str(e)}"
+                return None

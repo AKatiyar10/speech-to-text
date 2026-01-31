@@ -14,6 +14,7 @@ Imports from separate modules for better organization:
 """
 import sys
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Query, HTTPException, UploadFile, File, Form
+from websockets.exceptions import ConnectionClosed
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, Dict, Any
 from pydantic import BaseModel
@@ -76,7 +77,7 @@ class GenerateFeedbackResponse(BaseModel):
 # Initialize connection manager (loads models)
 # Use absolute path for history file to ensure persistence across CWDs
 import os
-history_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "session_history.json")
+history_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sessions", "session_history.json")
 manager = ConnectionManager(model_name="llama3.1:8b", history_file=history_path)
 
 
@@ -155,19 +156,29 @@ async def generate_feedback_for_session(session_id: int):
         
         # Check if feedback already exists
         if session.get('speaking_feedback'):
-            return {
-                "session_id": session_id,
-                "speaking_feedback": session['speaking_feedback'],
-                "timestamp": session.get('feedback_generated_at', ''),
-                "status": "already_exists"
-            }
+            existing = session['speaking_feedback']
+            # Allow retry if previous feedback was an error or fallback message
+            if not (existing.startswith("Error") or 
+                    existing.startswith("Refinement engine disabled") or 
+                    existing == "No feedback generated."):
+                return {
+                    "session_id": session_id,
+                    "speaking_feedback": existing,
+                    "timestamp": session.get('feedback_generated_at', ''),
+                    "status": "already_exists"
+                }
         
         # Generate feedback
+        feedback = None
         if manager.refinement.enabled:
             feedback = await manager.refinement.generate_feedback(session['raw_text'])
         else:
-            feedback = "Refinement engine disabled. Ollama must be running for feedback generation."
+            # If disabled, we can return a specific status but NOT save it as feedback text
+            raise HTTPException(status_code=503, detail="Refinement engine is disabled")
         
+        if feedback is None:
+             raise HTTPException(status_code=500, detail="Failed to generate feedback")
+
         # Update session
         updated = manager.history_manager.update_session_feedback(session_id, feedback)
         
@@ -321,7 +332,7 @@ async def websocket_endpoint(
                 logger.info(f"[VERBOSE] Audio received from {client_id}: {len(data)} bytes")
             await manager.handle_audio(client_id, data)
 
-    except WebSocketDisconnect:
+    except (WebSocketDisconnect, ConnectionClosed):
         logger.info(f"WebSocket disconnected normally: {client_id}")
     except Exception as e:
         logger.error(f"WebSocket error for {client_id}: {e}")

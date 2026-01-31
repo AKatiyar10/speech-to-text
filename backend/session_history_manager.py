@@ -4,6 +4,7 @@ Session history manager for storing transcriptions in JSON.
 import logging
 import json
 import threading
+import os
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional, List
@@ -17,7 +18,12 @@ VERBOSE_LOGGING = True
 
 class SessionHistoryManager:
     """Manages session history in JSON file with thread-safe operations"""
-    def __init__(self, history_file="session_history.json"):
+    def __init__(self, history_file=None):
+        if history_file is None:
+            # Use absolute path relative to this file to ensure it stays in backend/sessions/
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            history_file = os.path.join(base_dir, "sessions", "session_history.json")
+            
         self.history_file = Path(history_file)
         self.sessions = []
         self._lock = threading.Lock()  # Thread-safe file operations
@@ -127,6 +133,10 @@ class SessionHistoryManager:
     def _save_history(self):
         """Save history to file (called within lock)"""
         try:
+            # Ensure parent directory exists
+            if not self.history_file.parent.exists():
+                self.history_file.parent.mkdir(parents=True, exist_ok=True)
+                
             with open(self.history_file, 'w', encoding='utf-8') as f:
                 json.dump(self.sessions, f, indent=2, ensure_ascii=False)
             logger.info(f"✓ History saved ({len(self.sessions)} sessions)")
